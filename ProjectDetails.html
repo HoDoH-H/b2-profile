@@ -291,6 +291,7 @@
     <nav aria-label="Main navigation">
       <div class="logo" role="img" aria-label="Portfolio Logo">MICHON Axel</div>
       <div>
+        <a href="Formulaire.html" aria-label="Go to Formulaire section">Formulaire</a>
         <a href="portfolio.html#projects" aria-label="Go to Projects section on portfolio page">Projects</a>
         <a href="portfolio.html#contact" aria-label="Go to Contact section on portfolio page">Contact</a>
       </div>
@@ -450,7 +451,7 @@
     const modal = document.getElementById('image-modal');
     const modalImage = document.getElementById('modal-image');
     const modalCaption = document.getElementById('modal-caption');
-    const closeModalBtn = document.getElementById('close-modal');
+    //const closeModalBtn = document.getElementById('close-modal');
 
     function openModal(e) {
       const img = e.target;
@@ -464,7 +465,7 @@
       modal.style.display = 'flex';
 
       // Trap focus within modal
-      closeModalBtn.focus();
+      //closeModalBtn.focus();
       modal.addEventListener('keydown', trapFocus);
     }
 
@@ -482,11 +483,11 @@
       }
       if (e.key === 'Tab') {
         e.preventDefault();
-        closeModalBtn.focus();
+        //closeModalBtn.focus();
       }
     }
 
-    closeModalBtn.addEventListener('click', closeModal);
+    //closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
