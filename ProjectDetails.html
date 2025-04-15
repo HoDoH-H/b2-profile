@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #ff9300;
+      box-shadow: 0 0 10px rgba(255, 147, 0, 0.5);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 24px;
+      text-shadow: 0 0 5px #ff9300;
+    }
+    nav a {
+      color: #ff9300;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffffff;
+    }
+    nav a:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .project-header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+      border-bottom: 2px solid #ff9300;
+    }
+    .project-header h1 {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 36px;
+      text-shadow: 0 0 10px #ff9300;
+      margin: 0 0 20px;
+    }
+    .project-header p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .project-details {
+      padding: 40px 20px;
+    }
+    .project-details h2 {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 24px;
+      text-shadow: 0 0 5px #ff9300;
+      margin-bottom: 20px;
+    }
+    .project-details p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .project-details ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .project-details ul li {
+      font-size: 16px;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    .project-details ul li:before {
+      content: "▶";
+      color: #ff9300;
+      position: absolute;
+      left: 0;
+    }
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .media-item {
+      background-color: #1a1a1a;
+      border: 2px solid #ff9300;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .media-item p {
+      padding: 10px;
+      margin: 0;
+      font-size: 14px;
+      text-align: center;
+    }
+    .back-btn {
+      text-align: center;
+      margin: 40px 0;
+    }
+    button {
+      padding: 12px 24px;
+      background-color: #ff9300;
+      border: none;
+      border-radius: 5px;
+      color: #000000;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #e68200;
+    }
+    button:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .error-message {
+      text-align: center;
+      font-size: 18px;
+      color: #ff5555;
+      padding: 40px 20px;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media (prefers-contrast: high) {
+      header, .project-header, .project-details {
+        background-color: #000000;
+        border-color: #ffffff;
+      }
+      button {
+        background-color: #ffffff;
+        color: #000000;
+      }
+    }
+    @media (max-width: 768px) {
+      .project-header h1 {
+        font-size: 28px;
+      }
+      .project-header p {
+        font-size: 16px;
+      }
+      .project-details h2 {
+        font-size: 20px;
+      }
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+      nav a {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <header>
+    <nav aria-label="Main navigation">
+      <div class="logo" role="img" aria-label="GameDev Portfolio Logo">GameDev Portfolio</div>
+      <div>
+        <a href="portfolio.html#projects" aria-label="Go to Projects section on portfolio page">Projects</a>
+        <a href="portfolio.html#contact" aria-label="Go to Contact section on portfolio page">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="project-header" aria-labelledby="project-title">
+      <h1 id="project-title">Project Title</h1>
+      <p id="project-description">Project description will be loaded here.</p>
+    </section>
+
+    <section class="project-details" aria-labelledby="details-title">
+      <h2 id="details-title">Project Details</h2>
+      <p id="release-date"><strong>Release Date:</strong> To be loaded</p>
+      <p id="dev-period"><strong>Development Period:</strong> To be loaded</p>
+      <p id="platform"><strong>Platform:</strong> To be loaded</p>
+      <p id="tech-stack"><strong>Tech Stack:</strong> To be loaded</p>
+
+      <h2 id="contributions-title">My Contributions</h2>
+      <ul id="contributions-list">
+        <li>Contributions will be loaded here.</li>
+      </ul>
+
+      <h2 id="media-title">Media Gallery</h2>
+      <div class="media-gallery" id="media-gallery" role="list" aria-label="Project Media Gallery">
+        <!-- Media items will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <div class="error-message" id="error-message" style="display: none;">
+      Project not found. Please return to the portfolio page and select a project.
+    </div>
+
+    <div class="back-btn">
+      <button onclick="window.location.href='portfolio.html'" aria-describedby="back-description">Back to Portfolio</button>
+      <span id="back-description" class="sr-only">This button redirects to the portfolio main page.</span>
+    </div>
+  </main>
+
+  <script>
+    // Project data
+    const projects = {
+      'space-blaster': {
+        title: 'Space Blaster',
+        description: 'A high-octane space shooter with retro pixel art and dynamic gameplay.',
+        releaseDate: 'March 15, 2024',
+        devPeriod: 'November 2023 - March 2024',
+        platform: 'PC, Web',
+        techStack: 'Unity, C#, Adobe Photoshop for pixel art',
+        contributions: [
+          'Designed and implemented core gameplay mechanics, including shooting and enemy AI.',
+          'Created retro-style pixel art for spaceships, backgrounds, and effects.',
+          'Optimized game performance for web deployment using WebGL.',
+          'Composed and integrated chiptune music and sound effects.'
+        ],
+        media: [
+          {
+            type: 'image',
+            src: 'https://via.placeholder.com/400x200?text=Gameplay+Screenshot',
+            alt: 'Gameplay screenshot of Space Blaster showing a spaceship dodging asteroids',
+            caption: 'Gameplay Screenshot'
+          },
+          {
+            type: 'video',
+            src: 'https://via.placeholder.com/400x200.mp4',
+            label: 'Gameplay trailer of Space Blaster',
+            caption: 'Gameplay Trailer'
+          },
+          {
+            type: 'image',
+            src: 'https://via.placeholder.com/400x200?text=Concept+Art',
+            alt: 'Concept art for Space Blaster showing early designs of the main spaceship',
+            caption: 'Concept Art'
+          }
+        ]
+      },
+      'mystic-realms': {
+        title: 'Mystic Realms',
+        description: 'An RPG adventure with hand-drawn art and a captivating storyline.',
+        releaseDate: 'August 20, 2024',
+        devPeriod: 'January 2024 - August 2024',
+        platform: 'PC, Console',
+        techStack: 'Unreal Engine, C++, Adobe Illustrator for art',
+        contributions: [
+          'Developed the dialogue system and quest mechanics.',
+          'Designed hand-drawn characters and environments.',
+          'Implemented lighting and particle effects for immersive visuals.',
+          'Collaborated with a team to balance gameplay difficulty.'
+        ],
+        media: [
+          {
+            type: 'image',
+            src: 'https://via.placeholder.com/400x200?text=Forest+Scene',
+            alt: 'Screenshot of Mystic Realms showing a forest scene with a character holding a glowing staff',
+            caption: 'Forest Scene'
+          },
+          {
+            type: 'video',
+            src: 'https://via.placeholder.com/400x200.mp4',
+            label: 'Cinematic trailer of Mystic Realms',
+            caption: 'Cinematic Trailer'
+          },
+          {
+            type: 'image',
+            src: 'https://via.placeholder.com/400x200?text=Character+Design',
+            alt: 'Character design sketch for Mystic Realms showing a warrior with detailed armor',
+            caption: 'Character Design'
+          }
+        ]
+      }
+      // Add more projects here following the same structure
+      /*
+      'project-id': {
+        title: 'Project Title',
+        description: 'Project description.',
+        releaseDate: 'Release date',
+        devPeriod: 'Development period',
+        platform: 'Platform',
+        techStack: 'Tech stack',
+        contributions: [
+          'Contribution 1.',
+          'Contribution 2.'
+        ],
+        media: [
+          {
+            type: 'image',
+            src: 'image-url',
+            alt: 'Descriptive alt text',
+            caption: 'Caption'
+          },
+          {
+            type: 'video',
+            src: 'video-url',
+            label: 'Descriptive label',
+            caption: 'Caption'
+          }
+        ]
+      }
+      */
+    };
+
+    // Function to load project details
+    function loadProjectDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const projectId = urlParams.get('project');
+      const project = projects[projectId];
+
+      const projectTitle = document.getElementById('project-title');
+      const projectDescription = document.getElementById('project-description');
+      const releaseDate = document.getElementById('release-date');
+      const devPeriod = document.getElementById('dev-period');
+      const platform = document.getElementById('platform');
+      const techStack = document.getElementById('tech-stack');
+      const contributionsList = document.getElementById('contributions-list');
+      const mediaGallery = document.getElementById('media-gallery');
+      const errorMessage = document.getElementById('error-message');
+      const projectDetailsSection = document.querySelector('.project-details');
+
+      if (project) {
+        // Update basic project info
+        document.title = `Project Details - ${project.title}`;
+        projectTitle.textContent = project.title;
+        projectDescription.textContent = project.description;
+        releaseDate.innerHTML = `<strong>Release Date:</strong> ${project.releaseDate}`;
+        devPeriod.innerHTML = `<strong>Development Period:</strong> ${project.devPeriod}`;
+        platform.innerHTML = `<strong>Platform:</strong> ${project.platform}`;
+        techStack.innerHTML = `<strong>Tech Stack:</strong> ${project.techStack}`;
+
+        // Update contributions
+        contributionsList.innerHTML = project.contributions.map(contribution => `<li>${contribution}</li>`).join('');
+
+        // Update media gallery
+        mediaGallery.innerHTML = project.media.map(item => `
+          <div class="media-item" role="listitem">
+            ${item.type === 'image' ? 
+              `<img src="${item.src}" alt="${item.alt}">` :
+              `<video controls aria-label="${item.label}">
+                 <source src="${item.src}" type="video/mp4">
+                 Your browser does not support the video tag.
+               </video>`
+            }
+            <p>${item.caption}</p>
+          </div>
+        `).join('');
+
+        // Hide error message and show project details
+        errorMessage.style.display = 'none';
+        projectDetailsSection.style.display = 'block';
+      } else {
+        // Show error message and hide project details
+        errorMessage.style.display = 'block';
+        projectDetailsSection.style.display = 'none';
+        projectTitle.textContent = 'Project Not Found';
+        projectDescription.textContent = 'Please select a project from the portfolio page.';
+      }
+    }
+
+    // Load project details on page load
+    window.onload = loadProjectDetails;
+
+    // Ensure navigation links are accessible with Enter key
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          window.location.href = link.href;
+        }
+      });
+    });
+
+    // Focus management for accessibility
+    document.querySelector('button').addEventListener('click', () => {
+      setTimeout(() => {
+        const portfolioMain = document.querySelector('portfolio.html');
+        if (portfolioMain) portfolioMain.focus();
+      }, 100);
+    });
+  </script>
+</body>
+</html>
