@@ -258,44 +258,43 @@
   <script>
     // Project data
     const projects = {
-      'space-blaster': {
-        title: 'Space Blaster',
-        description: 'A high-octane space shooter with retro pixel art and dynamic gameplay.',
-        releaseDate: 'March 15, 2024',
-        devPeriod: 'November 2023 - March 2024',
-        platform: 'PC, Web',
-        techStack: 'Unity, C#, Adobe Photoshop for pixel art',
+      'fear-destiny': {
+        title: 'Fear Destiny',
+        description: 'Fear Destiny is my first real project of my own. It is a RPG game quite similar of old school Pokemon games. This is actually more of a prototype than a real game for now...',
+        devPeriod: 'April 2024 - Today',
+        platform: 'PC',
+        techStack: 'Unity 6, C#',
         contributions: [
-          'Designed and implemented core gameplay mechanics, including shooting and enemy AI.',
-          'Created retro-style pixel art for spaceships, backgrounds, and effects.',
-          'Optimized game performance for web deployment using WebGL.',
-          'Composed and integrated chiptune music and sound effects.'
+          'Designed and implemented core gameplay mechanics, including battles and AIs.',
+          'Created level designs and maps.',
+          'Integration of SFX and musics.',
+          'Creation of UIs.'
+
         ],
         media: [
           {
             type: 'image',
-            src: 'https://via.placeholder.com/400x200?text=Gameplay+Screenshot',
-            alt: 'Gameplay screenshot of Space Blaster showing a spaceship dodging asteroids',
+            src: 'Images/FearDestiny-00',
+            alt: 'Gameplay screenshot of Fear Destiny during battle',
             caption: 'Gameplay Screenshot'
           },
           {
-            type: 'video',
-            src: 'https://via.placeholder.com/400x200.mp4',
-            label: 'Gameplay trailer of Space Blaster',
-            caption: 'Gameplay Trailer'
+            type: 'image',
+            src: 'Images/FearDestiny-01',
+            alt: 'Gameplay screenshot of Fear Destiny from the main town',
+            caption: 'Gameplay Screenshot'
           },
           {
             type: 'image',
-            src: 'https://via.placeholder.com/400x200?text=Concept+Art',
-            alt: 'Concept art for Space Blaster showing early designs of the main spaceship',
-            caption: 'Concept Art'
-          }
+            src: 'Images/FearDestiny-02',
+            alt: 'Gameplay screenshot of Fear Destiny inside Inventory',
+            caption: 'Gameplay Screenshot'
+          },
         ]
       },
       'mystic-realms': {
         title: 'Mystic Realms',
         description: 'An RPG adventure with hand-drawn art and a captivating storyline.',
-        releaseDate: 'August 20, 2024',
         devPeriod: 'January 2024 - August 2024',
         platform: 'PC, Console',
         techStack: 'Unreal Engine, C++, Adobe Illustrator for art',
@@ -379,7 +378,6 @@
         document.title = `Project Details - ${project.title}`;
         projectTitle.textContent = project.title;
         projectDescription.textContent = project.description;
-        releaseDate.innerHTML = `<strong>Release Date:</strong> ${project.releaseDate}`;
         devPeriod.innerHTML = `<strong>Development Period:</strong> ${project.devPeriod}`;
         platform.innerHTML = `<strong>Platform:</strong> ${project.platform}`;
         techStack.innerHTML = `<strong>Tech Stack:</strong> ${project.techStack}`;
