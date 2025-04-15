@@ -209,8 +209,6 @@
   </style>
 </head>
 <body>
-  <a href="#main-content" class="sr-only">Skip to main content</a>
-
   <header>
     <nav aria-label="Main navigation">
       <div class="logo" role="img" aria-label="GameDev Portfolio Logo">GameDev Portfolio</div>
@@ -261,6 +259,7 @@
       'fear-destiny': {
         title: 'Fear Destiny',
         description: 'Fear Destiny is my first real project of my own. It is a RPG game quite similar of old school Pokemon games. This is actually more of a prototype than a real game for now...',
+        releaseDate: "No release date yet.",
         devPeriod: 'April 2024 - Today',
         platform: 'PC',
         techStack: 'Unity 6, C#',
@@ -274,19 +273,19 @@
         media: [
           {
             type: 'image',
-            src: 'Images/FearDestiny-00',
+            src: 'Images/FearDestiny-00.png',
             alt: 'Gameplay screenshot of Fear Destiny during battle',
             caption: 'Gameplay Screenshot'
           },
           {
             type: 'image',
-            src: 'Images/FearDestiny-01',
+            src: 'Images/FearDestiny-01.png',
             alt: 'Gameplay screenshot of Fear Destiny from the main town',
             caption: 'Gameplay Screenshot'
           },
           {
             type: 'image',
-            src: 'Images/FearDestiny-02',
+            src: 'Images/FearDestiny-02.png',
             alt: 'Gameplay screenshot of Fear Destiny inside Inventory',
             caption: 'Gameplay Screenshot'
           },
@@ -378,6 +377,7 @@
         document.title = `Project Details - ${project.title}`;
         projectTitle.textContent = project.title;
         projectDescription.textContent = project.description;
+        releaseDate.innerHTML = `<strong>Release Date:</strong> ${project.releaseDate}`;
         devPeriod.innerHTML = `<strong>Development Period:</strong> ${project.devPeriod}`;
         platform.innerHTML = `<strong>Platform:</strong> ${project.platform}`;
         techStack.innerHTML = `<strong>Tech Stack:</strong> ${project.techStack}`;
