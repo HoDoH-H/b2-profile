@@ -93,8 +93,9 @@
     }
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
       gap: 30px;
+      justify-content: center;
     }
     .project-card {
       background-color: #1a1a1a;
@@ -102,6 +103,8 @@
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+      max-width: 350px;
     }
     .project-card:hover {
       transform: translateY(-5px);
@@ -268,7 +271,7 @@
       <div class="projects" role="list" aria-label="Featured Projects">
         <!-- Project 1 -->
         <article class="project-card" role="listitem" tabindex="0">
-          <img src="Images/FearDestiny-p.png" alt="Screenshot of Space Blaster game, a retro-style space shooter with pixelated spaceships and glowing projectiles">
+          <img src="Images/FearDestiny-p.png" alt="An old school RPG">
           <div class="project-content">
             <h3>Fear Destiny</h3>
             <p>An old school RPG.</p>
@@ -290,6 +293,7 @@
         -->
       </div>
     </section>
+  </main>
 
   <footer id="contact" aria-label="Contact information">
     <p>Let's connect! Reach me at <a href="mailto:axelmichon.pro@gmail.com" aria-label="Email me at axelmichon.pro@gmail.com">axelmichon.pro@gmail.com</a></p>
