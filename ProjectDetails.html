@@ -121,8 +121,18 @@
       border: 2px solid #ff9300;
       border-radius: 10px;
       overflow: hidden;
+      position: relative;
     }
-    .media-item img,
+    .media-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .media-item img:hover {
+      opacity: 0.8;
+    }
     .media-item video {
       width: 100%;
       height: 200px;
@@ -162,6 +172,67 @@
       color: #ff5555;
       padding: 40px 20px;
     }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      border: 3px solid #ff9300;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 147, 0, 0.7);
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 7px;
+    }
+    .modal-caption {
+      text-align: center;
+      padding: 10px;
+      font-size: 16px;
+      color: #ffffff;
+      background-color: #1a1a1a;
+      border-top: 2px solid #ff9300;
+      border-radius: 0 0 7px 7px;
+    }
+    .close-btn {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background-color: #ff9300;
+      color: #000000;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    .close-btn:hover {
+      background-color: #e68200;
+    }
+    .close-btn:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
     .sr-only {
       position: absolute;
       width: 1px;
@@ -183,9 +254,12 @@
         background-color: #000000;
         border-color: #ffffff;
       }
-      button {
+      button, .close-btn {
         background-color: #ffffff;
         color: #000000;
+      }
+      .modal-content {
+        border-color: #ffffff;
       }
     }
     @media (max-width: 768px) {
@@ -205,10 +279,16 @@
       nav a {
         margin-left: 0;
       }
+      .modal-content {
+        max-width: 95%;
+        max-height: 85%;
+      }
     }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
   <header>
     <nav aria-label="Main navigation">
       <div class="logo" role="img" aria-label="GameDev Portfolio Logo">GameDev Portfolio</div>
@@ -251,6 +331,15 @@
       <button onclick="window.location.href='portfolio.html'" aria-describedby="back-description">Back to Portfolio</button>
       <span id="back-description" class="sr-only">This button redirects to the portfolio main page.</span>
     </div>
+
+    <!-- Modal for enlarged images -->
+    <div class="modal" id="image-modal" role="dialog" aria-label="Enlarged image modal">
+      <div class="modal-content">
+        <button class="close-btn" id="close-modal" aria-label="Close modal">&times;</button>
+        <img id="modal-image" src="" alt="">
+        <div class="modal-caption" id="modal-caption"></div>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -258,7 +347,7 @@
     const projects = {
       'fear-destiny': {
         title: 'Fear Destiny',
-        description: 'Fear Destiny is my first real project of my own. It is a RPG game quite similar of old school Pokemon games. This is actually more of a prototype than a real game for now...',
+        description: 'Fear Destiny is my first real project of my own. It is a RPG game quite similar to old school Pokémon games. This is actually more of a prototype than a real game for now...',
         releaseDate: "No release date yet.",
         devPeriod: 'April 2024 - Today',
         platform: 'PC',
@@ -268,7 +357,6 @@
           'Created level designs and maps.',
           'Integration of SFX and musics.',
           'Creation of UIs.'
-
         ],
         media: [
           {
@@ -324,35 +412,6 @@
           }
         ]
       }
-      // Add more projects here following the same structure
-      /*
-      'project-id': {
-        title: 'Project Title',
-        description: 'Project description.',
-        releaseDate: 'Release date',
-        devPeriod: 'Development period',
-        platform: 'Platform',
-        techStack: 'Tech stack',
-        contributions: [
-          'Contribution 1.',
-          'Contribution 2.'
-        ],
-        media: [
-          {
-            type: 'image',
-            src: 'image-url',
-            alt: 'Descriptive alt text',
-            caption: 'Caption'
-          },
-          {
-            type: 'video',
-            src: 'video-url',
-            label: 'Descriptive label',
-            caption: 'Caption'
-          }
-        ]
-      }
-      */
     };
 
     // Function to load project details
@@ -377,7 +436,7 @@
         document.title = `Project Details - ${project.title}`;
         projectTitle.textContent = project.title;
         projectDescription.textContent = project.description;
-        releaseDate.innerHTML = `<strong>Release Date:</strong> ${project.releaseDate}`;
+        releaseDate.innerHTML = `<strong>Release Date:</strong> ${project.releaseDate || 'Not specified'}`;
         devPeriod.innerHTML = `<strong>Development Period:</strong> ${project.devPeriod}`;
         platform.innerHTML = `<strong>Platform:</strong> ${project.platform}`;
         techStack.innerHTML = `<strong>Tech Stack:</strong> ${project.techStack}`;
@@ -386,10 +445,10 @@
         contributionsList.innerHTML = project.contributions.map(contribution => `<li>${contribution}</li>`).join('');
 
         // Update media gallery
-        mediaGallery.innerHTML = project.media.map(item => `
+        mediaGallery.innerHTML = project.media.map((item, index) => `
           <div class="media-item" role="listitem">
             ${item.type === 'image' ? 
-              `<img src="${item.src}" alt="${item.alt}">` :
+              `<img src="${item.src}" alt="${item.alt}" data-index="${index}" tabindex="0" role="button" aria-label="Enlarge ${item.caption}">` :
               `<video controls aria-label="${item.label}">
                  <source src="${item.src}" type="video/mp4">
                  Your browser does not support the video tag.
@@ -402,6 +461,17 @@
         // Hide error message and show project details
         errorMessage.style.display = 'none';
         projectDetailsSection.style.display = 'block';
+
+        // Add event listeners for images
+        document.querySelectorAll('.media-item img').forEach(img => {
+          img.addEventListener('click', openModal);
+          img.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === 'Space') {
+              e.preventDefault();
+              openModal(e);
+            }
+          });
+        });
       } else {
         // Show error message and hide project details
         errorMessage.style.display = 'block';
@@ -410,6 +480,51 @@
         projectDescription.textContent = 'Please select a project from the portfolio page.';
       }
     }
+
+    // Modal functionality
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-caption');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    function openModal(e) {
+      const img = e.target;
+      const projectId = new URLSearchParams(window.location.search).get('project');
+      const project = projects[projectId];
+      const index = parseInt(img.getAttribute('data-index'));
+
+      modalImage.src = project.media[index].src;
+      modalImage.alt = project.media[index].alt;
+      modalCaption.textContent = project.media[index].caption;
+      modal.style.display = 'flex';
+
+      // Trap focus within modal
+      closeModalBtn.focus();
+      modal.addEventListener('keydown', trapFocus);
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.removeEventListener('keydown', trapFocus);
+      // Return focus to the triggering image
+      const activeImg = document.querySelector(`.media-item img[data-index="${modalImage.getAttribute('data-index')}"]`);
+      if (activeImg) activeImg.focus();
+    }
+
+    function trapFocus(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        closeModalBtn.focus();
+      }
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
 
     // Load project details on page load
     window.onload = loadProjectDetails;
