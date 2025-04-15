@@ -334,7 +334,7 @@
     <!-- Modal for enlarged images -->
     <div class="modal" id="image-modal" role="dialog" aria-label="Enlarged image modal">
       <div class="modal-content">
-        <!-- <button class="close-btn" id="close-modal" aria-label="Close modal">&times;</button> -->
+        <button class="close-btn" id="close-modal" aria-label="Close modal">&times;</button>
         <img id="modal-image" src="" alt="">
         <div class="modal-caption" id="modal-caption"></div>
       </div>
@@ -451,7 +451,7 @@
     const modal = document.getElementById('image-modal');
     const modalImage = document.getElementById('modal-image');
     const modalCaption = document.getElementById('modal-caption');
-    //const closeModalBtn = document.getElementById('close-modal');
+    const closeModalBtn = document.getElementById('close-modal');
 
     function openModal(e) {
       const img = e.target;
@@ -465,7 +465,7 @@
       modal.style.display = 'flex';
 
       // Trap focus within modal
-      //closeModalBtn.focus();
+      closeModalBtn.focus();
       modal.addEventListener('keydown', trapFocus);
     }
 
@@ -483,11 +483,11 @@
       }
       if (e.key === 'Tab') {
         e.preventDefault();
-        //closeModalBtn.focus();
+        closeModalBtn.focus();
       }
     }
 
-    //closeModalBtn.addEventListener('click', closeModal);
+    closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
@@ -500,9 +500,6 @@
       link.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           window.location.href = link.href;
-        }
-        if(e.key === 'Escape') {
-          closeModal();
         }
       });
     });
