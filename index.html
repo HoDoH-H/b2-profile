@@ -1,238 +1,334 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axel MICHON - Fiche de suivi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My GameDev Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #ff9300;
+      box-shadow: 0 0 10px rgba(255, 147, 0, 0.5);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 24px;
+      text-shadow: 0 0 5px #ff9300;
+    }
+    nav a {
+      color: #ff9300;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 20px;
+      padding: 5px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffffff;
+    }
+    nav a:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .myDesc {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+      border-bottom: 2px solid #ff9300;
+    }
+    .myDesc h1 {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 40px;
+      text-shadow: 0 0 10px #ff9300;
+      margin: 0 0 20px;
+    }
+    .myDesc p {
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .projects-section {
+      padding: 40px 20px;
+    }
+    .projects-section h2 {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 0 5px #ff9300;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
+      gap: 30px;
+      justify-content: center;
+    }
+    .project-card {
+      background-color: #1a1a1a;
+      border: 2px solid #ff9300;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+      max-width: 350px;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255, 147, 0, 0.7);
+    }
+    .project-card:focus-within {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 2px solid #ff9300;
+    }
+    .project-content {
+      padding: 20px;
+    }
+    .project-content h3 {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 20px;
+      margin: 0 0 10px;
+      text-shadow: 0 0 3px #ff9300;
+    }
+    .project-content p {
+      font-size: 16px;
+      margin: 0 0 15px;
+    }
+    .project-content .tech {
+      font-size: 14px;
+      color: #aaaaaa;
+      margin-bottom: 15px;
+    }
+    .project-content a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #ff9300;
+      color: #000000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .project-content a:hover {
+      background-color: #e68200;
+    }
+    .project-content a:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .register-btn {
+      text-align: center;
+      margin: 40px 0;
+    }
+    button {
+      padding: 12px 24px;
+      background-color: #ff9300;
+      border: none;
+      border-radius: 5px;
+      color: #000000;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #e68200;
+    }
+    button:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-top: 2px solid #ff9300;
+      margin-top: 40px;
+    }
+    footer p {
+      margin: 0;
+      font-size: 16px;
+    }
+    footer a {
+      color: #ff9300;
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    footer a:focus {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media (prefers-contrast: high) {
+      header, .myDesc, .projects-section, footer {
+        background-color: #000000;
+        border-color: #ffffff;
+      }
+      button, .project-content a {
+        background-color: #ffffff;
+        color: #000000;
+      }
+    }
+    @media (max-width: 768px) {
+      .myDesc h1 {
+        font-size: 28px;
+      }
+      .myDesc p {
+        font-size: 16px;
+      }
+      .projects-section h2 {
+        font-size: 24px;
+      }
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+      nav a {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between bg-white-100">
-
-    <div class="mt-16 mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:text-center">
-            <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl underline">Axel MICHON - Spécialité Game Prog</h1>
-        </div>
-    </div>
-   
-<!-- Compétences clés -->
-<div class="bg-white py-24 sm:py-32 flex-grow">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base font-semibold leading-7 text-indigo-600">Mettre en avant ses réussites</h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Mes compétences clés</p>
-        <p class="mt-6 text-lg leading-8 text-gray-600">Vous trouverez ci-dessous un ensemble de compétences techniques et humaines acquises tout au long de mon parcours.
-        </p>
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <div class="logo" role="img" aria-label="Portfolio Logo">MICHON Axel</div>
+      <div>
+        <a href="#projects" aria-label="Go to Projects section">Projects</a>
+        <a href="#contact" aria-label="Go to Contact section">Contact</a>
       </div>
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-        <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                1
-              </div>
-              Une grande patience.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Suite à mes expériences, j'ai acquis une patience à toute épreuve, me permettant rester positif et travailleur, même durant les moment les plus difficiles.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                2
-              </div>
-              Unity.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">J'utilise Unity assez couramment depuis maintenant presque 2 ans. Je pense donc maintenant posséder une maîtrise convenable de ce dernier.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                3
-              </div>
-              C#.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Durant mes différent projets durant ces deux dernières années, j'ai pu acquérir des bases solides en C#.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-               4
-              </div>
-              Unreal Engine 5.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">J'ai pu participer durant l'année 2023-2024 à un projet de groupe nommé "Madness Project", ce dernier ayant été réalisé sur UE5, j'ai donc acquis les bases sur ce moteur.</dd>
-          </div>
-    </div>
-  </div>
-</div>
+    </nav>
+  </header>
 
-  <!-- Mes axes d'amélioration -->
-<div class="bg-white py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:text-center">
-        <h2 class="text-base font-semibold leading-7 text-indigo-600">Améliorer ses performances</h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Mes axes d'améliorations</p>
-        <p class="mt-6 text-lg leading-8 text-gray-600">Identifiez les domaines dans lesquels des progrès peuvent être réalisés et mettez en place des stratégies pour y parvenir.
-        </p>
+  <main id="main-content">
+    <section class="myDesc" aria-labelledby="myDescription-title">
+      <h1 id="myDesc-title">Hey, I'm Axel MICHON</h1>
+      <p>A passionate game developer creating immersive and fun experiences. Explore my projects below!</p>
+    </section>
+
+    <section class="projects-section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Featured Projects</h2>
+      <div class="projects" role="list" aria-label="Featured Projects">
+        <!-- Project 1 -->
+        <article class="project-card" role="listitem" tabindex="0">
+          <img src="Images/FearDestiny-p.png" alt="An old school RPG">
+          <div class="project-content">
+            <h3>Fear Destiny</h3>
+            <p>An old school RPG.</p>
+            <p class="tech"><strong>Tech:</strong> Unity, C#</p>
+            <a href="projectdetails?project=fear-destiny" aria-label="Learn more about Fear Destiny">Learn More</a>
+          </div>
+        </article>
+        <!-- Add more projects here by following this structure -->
+        <!-- 
+        <article class="project-card" role="listitem" tabindex="0">
+          <img src="your-image-url" alt="Descriptive alt text for your project screenshot">
+          <div class="project-content">
+            <h3>Project Name</h3>
+            <p>Description of the project.</p>
+            <p class="tech"><strong>Tech:</strong> Technologies used</p>
+            <a href="project-details.html?project=project-id" aria-label="Learn more about Project Name">Learn More</a>
+          </div>
+        </article>
+        -->
       </div>
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-        <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">           
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                1
-              </div>
-              Concentration.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Ma concentration est selon moi, l'un de mes plus grand problème. Je suis vite distrait lors d'un changement, ne serait-ce que minime, auditif ou visuel.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                2
-              </div>
-              C++.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Malgrés mon année sur Unreal Engine, je n'ai pas été ammener à utiliser le C++, ce faisant, je n'ai aucune base dans ce language.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                3
-              </div>
-              Discret.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Je suis globalement quelqu'un de discret qui parle peu, du moins, je parle peu avec les personnes que je connais peu. Ceci fait lien avec le point suivant.</dd>
-          </div>
-          <div class="relative pl-16">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
-              <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600 text-white">
-                4
-              </div>
-              Timidité et stresse.
-            </dt>
-            <dd class="mt-2 text-base leading-7 text-gray-600">Je suis malheureusement très timide avec les personnes que je connais pas / peu. Cela m'empêche très souvent de faire savoir mon point de vue aux autres lors de problèmes, le stresse intensifie ce problème, me faisant parfois divaguer durant mes prises de parole.</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </div>
-  
+    </section>
+  </main>
 
-<div class="container mx-auto">
-    <!-- Section principale -->
-    <div class="text-center mb-16">
-        <p class="text-indigo-600 font-semibold">Développer un argumentaire convaincant</p>
-        <h2 class="text-4xl font-bold mb-4">Mes documents de présentation</h2>
-        <p class="text-gray-500">Un aperçu de mes documents reflétant mon parcours et mes motivations.</p>
-    </div>
+  <footer id="contact" aria-label="Contact information">
+    <p>Let's connect! Reach me at <a href="mailto:axelmichon.pro@gmail.com" aria-label="Email me at axelmichon.pro@gmail.com">axelmichon.pro@gmail.com</a></p>
+    <p>
+      <a href="https://www.linkedin.com/in/axel-michon-5b154232b/" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile">LinkedIn</a> |
+      <a href="https://github.com/HoDoH-H" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile">GitHub</a> |
+      <a href="https://hodoh-h.itch.io/" target="_blank" rel="noopener noreferrer" aria-label="Visit my Itch.io profile">Itch.io</a>
+    </p>
+  </footer>
 
-    <!-- Grille de fonctionnalités -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <!-- Curriculum Vitae -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                    <img class="h-8 w-8 " src="assets/cv.svg" alt="cv">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Curriculum Vitae</h3>
-            <a href="assets/CV - Axel Michon.pdf" class="text-indigo-600 font-medium">Consulter &rarr;</a>
-        </div>
+  <script>
+    // Ensure project cards are keyboard navigable
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === 'Space') {
+          card.querySelector('a').click();
+        }
+      });
+    });
 
-        <!-- Lettre de motivation -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                    <img class="h-8 w-8 " src="assets/letter.svg" alt="Lettre de motivation">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Lettre de motivation</h3>
-            <a href="assets/Lettre Motivation - Axel Michon.pdf" class="text-indigo-600 font-medium">Consulter &rarr;</a>
-        </div>
+    // Ensure navigation links are accessible with Enter key
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          window.location.href = link.href;
+        }
+      });
+    });
 
-        <!-- Message de motivation -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                    <img class="h-8 w-8 " src="assets/message-motivation.svg" alt="Message de motivation">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Message de motivation</h3>
-            <a href="assets/Message de Motivation - Axel Michon.pdf" class="text-indigo-600 font-medium">Consulter &rarr;</a>
-        </div>
-
-        <!-- Mail de relance -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                    <img class="h-8 w-8 " src="assets/mail-up.svg" alt="Mail de relance">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Mail de relance</h3>
-            <a href="assets/Message de Relance - Axel Michon.pdf" class="text-indigo-600 font-medium">Consulter &rarr;</a>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Mon LinkedIn -->
-<div class="max-w-7xl mx-auto py-16 text-center">
-    <!-- Titre et description -->
-    <p class="text-indigo-600 font-semibold">Mettre en avant son parcours professionnel</p>
-    <h1 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Ma page LinkedIn</h1>
-    <p class="text-gray-500 mb-12">Rentrer en contact avec des professionnels du métier et les recruteurs du marché.</p>
-
-    <!-- Image centrée -->
-    <div class="flex justify-center">
-        <a href="https://www.linkedin.com/in/axel-michon-5b154232b/"><img src="https://marketplace.canva.com/EAEg1P45hCw/1/0/1600w/canva-simple-travail-linkedin-banni%C3%A8re-VoKP4HFhK8A.jpg" alt="cliquez pour découvrir mon LinkdIn" class="rounded-lg shadow-md"></a>
-    </div>
-</div>
-
-
-<!-- Autres sections potentielles -->
-
-<div class="container mx-auto">
-    <!-- Section principale -->
-    <div class="text-center mb-16">
-        <p class="text-indigo-600 font-semibold">Consulter les documents utiles à ma professionnalisation</p>
-        <h2 class="text-4xl font-bold mb-4">Recherche d'alternance</h2>
-        <p class="text-gray-500">Comprendre ma roadmap de compétences et mon tableau de recherche d'entreprises</p>
-    </div>
-
-    <!-- Grille de fonctionnalités -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center mb-16">
-        <!-- Colonne 1 -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Recherche d'alternance</h3>
-            <a href="https://docs.google.com/spreadsheets/d/1KCDI2E5f8Z6IImJtdS0Uq57EylfK1Dh3IBOE-pg5UWU/edit?usp=sharing" class="text-indigo-600 font-medium">Consulter le suivi &rarr;</a>
-        </div>
-
-        <!-- Colonne 2 -->
-        <div class="text-center">
-            <div class="flex justify-center mb-4">
-                <div class="text-indigo-600">
-                </div>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Montée en compétence</h3>
-            <a href="https://docs.google.com/spreadsheets/d/1cS6uP8djA_4W7uDZcI2s5GriMAV_LWMyfBjiDzN5a5Y/edit?usp=sharing" class="text-indigo-600 font-medium">Consulter la roadmap &rarr;</a>
-        </div>
-    </div>
-</div>
+    // Focus management for accessibility
+    document.querySelector('button').addEventListener('click', () => {
+      setTimeout(() => {
+        const registerForm = document.querySelector('index.html');
+        if (registerForm) registerForm.focus();
+      }, 100);
+    });
+  </script>
 </body>
-
-
-<!-- Footer -->
-<footer class="bg-purple-800 text-white p-6 w-full">
-    <div class="text-center">
-        <p>Fait avec ❤ - Lyon Ynov Campus</p>
-    </div>
-</footer>
-
-
 </html>
-
