@@ -1,0 +1,78 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions & Activities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Internship Report Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Introduction</a></li>
+                <li><a href="company.html">Company & Market</a></li>
+                <li><a href="missions.html">Missions & Activities</a></li>
+                <li><a href="reflection.html">Personal Reflection</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Missions and Activities</h2>
+            <h3>Responsibilities</h3>
+            <p>During my internship, I was responsible for [list tasks, e.g., developing website features, analyzing data]. My role evolved, allowing me to take on [more complex tasks, e.g., leading a small project].</p>
+            <h3>Tools and Methods</h3>
+            <p>I used tools like [e.g., Python, Jira, Excel] to streamline [specific tasks]. These tools enhanced my efficiency by [e.g., automating processes, improving collaboration].</p>
+            <h3>Teamwork and Interactions</h3>
+            <p>I collaborated with [e.g., the development team, marketing department], fostering [e.g., effective communication, cross-departmental synergy].</p>
+            <h3>Learning Examples</h3>
+            <p>One instance required me to [e.g., troubleshoot a coding issue], where I demonstrated [e.g., creativity, problem-solving] by [specific action].</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Internship Report Blog. All rights reserved.</p>
+    </footer>
+</body>
+</html>
