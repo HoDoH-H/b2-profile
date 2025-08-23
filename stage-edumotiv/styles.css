@@ -17,6 +17,29 @@ header {
     border-bottom: 4px solid #ff9300;
 }
 
+.logo {
+      font-family: 'Press Start 2P', cursive;
+      color: #ff9300;
+      font-size: 18px;
+      text-shadow: 0 0 5px #ff9300;
+}
+
+nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 20px;
+      padding: 5px;
+      transition: color 0.3s;
+}
+nav a:hover {
+    color: #ff9300;
+}
+nav a:focus {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+}
+
 header h1 {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
